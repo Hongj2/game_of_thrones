@@ -5,6 +5,8 @@ class GOT
   
   def run
     welcome
+    list_of_house
+    general_info
   end
   
   def welcome
@@ -17,9 +19,9 @@ class GOT
     puts"     |    |  |   vvvvvvvvvvvvvvvvvvvvv  |  |   |".bold
     puts"     |    |XX|          GAME OF         |XX|   |".bold
     puts"     |    |()|          THRONES         |()|   |".bold
-    puts"     |     \/      vvvvvvvvvvvvvvvvv     \/    |".bold
+    puts"     |     V      vvvvvvvvvvvvvvvvv       V    |".bold
     puts"     |                  +++++                  |".bold
-    puts"     |                _/     \_                |".bold
+    puts"     |                _b     d_                |".bold
     puts"     |               _|   O   |_               |".bold
     puts"     |               _|  ooo  |_               |".bold
     puts"     |mmmmmmmmmmmmmmmm|       |mmmmmmmmmmmmmmmm|".bold
@@ -33,10 +35,11 @@ class GOT
   end 
   
  def list_of_house
-    input=gets.strip
-    if input== "list"
-      list = Scraper.house.text.split("House")
-      list.each_with_index{|house,index| puts "[#{index+1}] #{house}"}
+    input = gets.strip
+    if input == "list"
+      puts "hi list"
+     #list = Scraper.house.text.split("House")
+      #list.each_with_index{|house,index| puts "[#{index+1}] #{house}"}
      elsif input == "exit"
     system "clear" or sys "cls"
     exit
@@ -48,10 +51,11 @@ class GOT
 end
 
   def general_info
-    input=gets.strip
+    input = gets.strip
     if input == "all"
-      all = Scraper.house.text.split("\n")
-      all.each_with_index{|house,index| puts "[#{index+1}] #{house}"}
+     puts "hi all"
+     # all = Scraper.house.text.split("\n")
+     # all.each_with_index{|house,index| puts "[#{index+1}] #{house}"}
     elsif input == "exit"
     system "clear"
     exit
