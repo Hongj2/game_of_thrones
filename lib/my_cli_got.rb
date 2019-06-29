@@ -20,22 +20,29 @@ class GOT
     puts "To see the information of all the houses of Westeros, type: all".bold
   end 
   
-  def list_of_house
+ def list_of_house
+    input=gets.strip
+    if input== "list"
+      list = Scraper.house.text.split("House")
+      list.each_with_index{|house,index| puts "[#{index+1}] #{house}"}
+    end
+    list
 end
 
   def general_info
-end
-
+    input=gets.strip
+    if input == "all"
+      all = Scraper.house.text.split("\n")
+      all.each_with_index{|house,index| puts "[#{index+1}] #{house}"}
+    elsif input == "exit"
+    system "clear" or sys "cls"
+    exit
+  else
+    puts "give me something to work..Try again".bold
+    
   def menu
 end
  
-  def sigils
-end
-
-def motto
-end
-
-
 
 
 
