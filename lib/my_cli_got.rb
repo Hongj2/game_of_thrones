@@ -5,9 +5,10 @@ class GOT
   
   def run
     welcome
-    list_of_house
-    general_info
+    orders
   end
+  
+  #issue = currently it requires user to follow the run order.. if 'motto' was first, it does not reconize the motto method 
   
   def welcome
     puts ""
@@ -30,42 +31,45 @@ class GOT
     puts "         TO THE BOOK ABOUT THE GREAT HOUSES        ".bold
     puts "                     OF WESTEROS                    ".bold
     puts ""
-    puts "To see the list of the great houses of Westeros, type: " + "list".bold 
-    puts "To see the information of all the houses of Westeros, type: " + "all".bold
+    puts "To see the list of the great houses of Westeros, type: " + "list".red.bold 
+    puts "To see the information of all the houses of Westeros, type: " + "all".red.bold
+   puts "To see the mottos of all the houses of Westeros, type: " + "motto".red.bold
   end 
   
- def list_of_house
-    input = gets.strip
+  def orders
+   input= gets.strip
     if input == "list"
-      puts "hi list"
+      list_of_house
+    elsif input == "all"
+      general_info
+    elsif  input == "motto"
+      mottos
+    else 
+      puts "The Lord Command Snow knows nothing of this order...Try again".blue.bold
+    end
+  end
+  
+  
+ def list_of_house
+     puts "hi list"
      #list = Scraper.house.text.split("House")
       #list.each_with_index{|house,index| puts "[#{index+1}] #{house}"}
-     elsif input == "exit"
-    system "clear" or sys "cls"
-    exit
-  else
-    puts "The Lord Command Snow knows nothing of this order...Try again".bold
-    
-  end
-    
-end
+      
+ end
 
   def general_info
-    input = gets.strip
-    if input == "all"
-     puts "hi all"
+   puts "hi all"
      # all = Scraper.house.text.split("\n")
      # all.each_with_index{|house,index| puts "[#{index+1}] #{house}"}
-    elsif input == "exit"
-    system "clear"
-    exit
-  else
-    puts "The Lord Command Snow knows nothing of this order...Try again".bold
-    
-  end
-end
- 
 
+  end
+ 
+  def mottos
+     puts "hi motto"
+     # all = Scraper.house.text.split("\n")
+     # all.each_with_index{|house,index| puts "[#{index+1}] #{house}"}
+   
+  end
 
 
 end
