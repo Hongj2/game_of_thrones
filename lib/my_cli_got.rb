@@ -86,10 +86,7 @@ class GOT
 
   def general_info
     puts ""
-    site = 'https://gameofthrones.fandom.com/wiki/Great_House'
-    page = Nokogiri::HTML(open(site)) 
-    general_info = page.css('div#mw-content-text>ul').text.split("\n")
-    general_info.each_with_index {|house,index| puts "[#{index +1}] #{house}"}
+    Scraper.scraper_gen_info
 
      pathways
   end
@@ -99,18 +96,14 @@ class GOT
   
  def list_of_house
      puts ""
-     site = 'https://gameofthrones.fandom.com/wiki/Great_House'
-     page = Nokogiri::HTML(open(site)) 
-     house_names= page.css('div#mw-content-text').first.css("li>b").text.split("House")
-     house_names.each_with_index {|house,index| puts "[#{index+1}] #{house}"}
-
+     Scraper.scraper_house_list
      puts ""
      puts "To see the general information about a house, type number [1-20]"
      puts "To see menu type [menu]"
      
       input= gets.strip
      if input.to_i.to_s == input
-         puts "should list a specific house information #{input} [NEEDS A METHOD [y] !!]"
+        #Scraper.scraper_sp_info["#{input}"]
          puts ""
          puts "To see the wiki page link type: [geek out]"
          puts "to return back to the list of houses types: [list]"
