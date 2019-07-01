@@ -1,5 +1,7 @@
 require 'nokogiri'
 require 'colorize'
+require 'open-uri'
+
 
 class GOT
   
@@ -34,6 +36,7 @@ class GOT
     puts "To see the information of all the houses of Westeros, type: " + "[all]".red.bold
     puts "To see the mottos of all the houses of Westeros, type: " + "[mottos]".red.bold
     puts "To see the sigils of all the houses of Westeros, type: " + "[sigils]".red.bold
+    puts ""
   end 
   
   def orders
@@ -82,7 +85,12 @@ class GOT
   end
 
   def general_info
-    puts "general list of information"
+    puts ""
+    site = 'https://gameofthrones.fandom.com/wiki/Great_House'
+    page = Nokogiri::HTML(open(site)) 
+    general_info = page.css('div#mw-content-text>ul').text.split("\n")
+    general_info.each_with_index {|house,index| puts "[#{index +1}] #{house}"}
+
      pathways
   end
       
@@ -90,7 +98,12 @@ class GOT
   
   
  def list_of_house
-     puts "[PUTS LIST OF HOUSE METHOD TO OUTPUT A LIST WITH INDEX NUMBER !!]"
+     puts ""
+     site = 'https://gameofthrones.fandom.com/wiki/Great_House'
+     page = Nokogiri::HTML(open(site)) 
+     house_names= page.css('div#mw-content-text').first.css("li>b").text.split("House")
+     house_names.each_with_index {|house,index| puts "[#{index+1}] #{house}"}
+
      puts ""
      puts "To see the general information about a house, type number [1-20]"
      puts "To see menu type [menu]"
