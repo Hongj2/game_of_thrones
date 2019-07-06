@@ -1,14 +1,16 @@
+require_relative './scraper'
+
 class Houses
-  @@all = []
-  
-  attr_accessible :name, :information, :sigil, :motto, :wiki
+  attr_accessor :name, :sigil, :motto, :wiki
+@@all = []
 
-
-def initialize(name,wiki)
+def initialize(name,wiki,sigil)
   @name = name
   @wiki = wiki 
+  @sigil= sigil
   @@all << self 
 end
+
 
 def self.all
     @@all

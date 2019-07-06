@@ -7,3 +7,4 @@ end
 
 require_relative './my_cli_got'
 require_relative './scraper'
+require_relative './houses'
