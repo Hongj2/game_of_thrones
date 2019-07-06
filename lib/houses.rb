@@ -1,16 +1,17 @@
 class Houses
   @@all = []
   
-  attr_accessible :name, :information, :sigil, :motto
-  
-def self.all
-    @@all
+  attr_accessible :name, :information, :sigil, :motto, :wiki
+
+
+def initialize(name,wiki)
+  @name = name
+  @wiki = wiki 
+  @@all << self 
 end
 
-def initialize(house,information,sigil=nil, motto=nil )
-  @house = house
-  self.motto = motto if motto
-  self.class.all << self
+def self.all
+    @@all
 end
 
 end
