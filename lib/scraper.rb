@@ -6,73 +6,37 @@ class Scraper
 
 BASE_URL = 'https://gameofthrones.fandom.com/wiki/Great_House'
 
-  def self.scraper_gen_info
-    page = Nokogiri::HTML(open(BASE_URL)) 
-    general_info = page.css('div#mw-content-text ul')[0..2].text.split("\n")
-  
-    #instantiate new House objects with name and url
-  end
-
-def self.tester
+#(LEAVE ALONE)
+def self.scraper_gen_info
   page = Nokogiri::HTML(open(BASE_URL)) 
-  house_namex = []
-  results= page.css('b a').each_with_index {|house,index| 
-  house_namex<< house.text
-    puts "[#{index+1}] #{house.text}" 
-  puts ""}.map
+  general_info = page.css('div#mw-content-text ul')[0..2].text.split("\n")
+  end
+  
+#instantiate new House objects with name and url
+
+def self.scrape_lvl1 
+html = Nokogiri::HTML(open(BASE_URL)) 
+  pages = html.css('b a').each {|houses|
+    name= houses.text
+    url= "https://gameofthrones.fandom.com#{houses.attribute('href').value}" 
+  House.new(name,url)}
+end
+
+# after 2nd lvl scrape update house objects
+#house_obj.sigil = page.css("sigil selector")
+#html.collect {|house|
+#page = house.attribute('href').value
+   
+   
+def self.general_information(house_obj)
+gen_info= {}
+html = Nokogiri::HTML(open("#{house_obj.url}"))
+      gen_info[:summary]= html.css('div#mw-content-text>p').first.text
+      gen_info[:motto]= html.css('aside div.pi-data-value>a')[1].text
+      gen_info[:sigil]= html.css("div.pi-item>div").first.text 
+gen_info
+end
  
-end
-
- def self.scraper_house_list
-     page = Nokogiri::HTML(open(BASE_URL)) 
-    house_names= page.css('div#mw-content-text').first.css("li>b").text.split("House")
-    house_names.each_with_index {|house,index| puts "[#{index+1}] #{house}"}
-end
-
-def self.scraper_house_wiki
-  page = Nokogiri::HTML(open(BASE_URL))
-  wiki= []
-  sigil= []
-  results= page.css('b a').each {|house|
-  wiki<< "https://gameofthrones.fandom.com#{house.attribute('href').value}" 
-  sigil<< Nokogiri::HTML(open("https://gameofthrones.fandom.com#{house.attribute('href').value}")).css("div.pi-item>div").first.text 
-}
- sigil.each_with_index {|s,index| puts "[#{index+1}] #{s}"}
-end
-
-def self.gen(num) #house_obj
-  page = Nokogiri::HTML(open(BASE_URL)) #house_obj.url
-  # after 2nd lvl scrape update house objects
-  #house_obj.sigil = page.css("sigil selector")
-  
-  house_name= []
-  wiki= []
-  sigil= []
-  gen_info = []
-  motto=[]
-  results= page.css('b a').each {|house|
-  
-  house_name<< house.text
-  wiki<< "https://gameofthrones.fandom.com#{house.attribute('href').value}" 
-  house_page = page= Nokogiri::HTML(open("https://gameofthrones.fandom.com#{url}"))
-  page= Nokogiri::HTML(open("https://gameofthrones.fandom.com#{house.attribute('href').value}"))
-  gen_info<< page.css('div#mw-content-text>p').first.text
-  motto<< page.css('aside div.pi-data-value>a')[1].text
-  sigil<< page.css("div.pi-item>div").first.text 
-  
-}
-
-puts ""
-puts house_name[num -1]
-puts ""
-puts "Motto:"+ motto[num -1]
-puts "Sigil:"+ sigil[num -1]
-puts ""
-puts gen_info[num -1]
-puts ""
-puts "Wikipage link:" + wiki[num -1]
-
-end
 
 end #final end
  

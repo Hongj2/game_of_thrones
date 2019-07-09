@@ -4,13 +4,18 @@ require 'open-uri'
 require_relative './houses'
 
 class GOT
-  
+ BASE_URL = 'https://gameofthrones.fandom.com/wiki/Great_House'
+ 
   def run
     welcome
     orders
   end
-  
-  
+
+def create_house 
+house_array = Scraper.scrape_lvl1
+    House.create(house_array)
+end
+
   def welcome
     puts ""
     puts"       |>      |>                     |>      |>".blue.bold
@@ -38,10 +43,13 @@ class GOT
     #puts "To see the sigils of all the houses of Westeros, type: " + "[sigil]".red.bold
     puts ""
   end 
-  
+
+
+
   def tester
-  
-  Scraper.tester
+  #input= gets.strip
+  Scraper.general_information
+  exit
 end
 
   def orders

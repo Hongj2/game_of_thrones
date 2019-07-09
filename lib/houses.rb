@@ -1,19 +1,21 @@
 require_relative './scraper'
-
 class House
-  attr_accessor :name, :sigil, :motto, :wiki
-@@all = []
+  attr_accessor :name,:url,:summary,:motto,:sigil
+  @@all = []
 
-def initialize(name,wiki,sigil)
-  @name = name
-  @wiki = wiki 
-  @sigil= sigil
+def initialize(name,url)
+  @name=name
+  @url=url 
   @@all << self 
 end
-# need to a create method
 
+def self.create(house_array)
+   house_array.each{|house| House.new(house)}
+end
+ 
 def self.all
     @@all
 end
+
 
 end
