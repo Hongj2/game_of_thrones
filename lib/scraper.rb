@@ -36,15 +36,21 @@ def self.gen(num)
   wiki= []
   sigil= []
   gen_info = []
+  motto=[]
   results= page.css('b a').each {|house|
+  
   house_name<< house.text
   wiki<< "https://gameofthrones.fandom.com#{house.attribute('href').value}" 
   gen_info<< Nokogiri::HTML(open("https://gameofthrones.fandom.com#{house.attribute('href').value}")).css('div#mw-content-text>p').first.text
+  motto<< Nokogiri::HTML(open("https://gameofthrones.fandom.com#{house.attribute('href').value}")).css('aside div.pi-data-value>a')[1].text
   sigil<< Nokogiri::HTML(open("https://gameofthrones.fandom.com#{house.attribute('href').value}")).css("div.pi-item>div").first.text 
+  
 }
 
 puts ""
 puts house_name[num -1]
+puts ""
+puts "Motto:"+ motto[num -1]
 puts "Sigil:"+ sigil[num -1]
 puts ""
 puts gen_info[num -1]
