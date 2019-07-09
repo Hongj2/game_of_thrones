@@ -12,12 +12,21 @@ BASE_URL = 'https://gameofthrones.fandom.com/wiki/Great_House'
     puts "[#{index +1}] #{house}" 
     puts ""}.map
   end
-  
-  def self.scraper_house_list
-     page = Nokogiri::HTML(open(BASE_URL)) 
-    house_names= page.css('div#mw-content-text').first.css("li>b").text.split("House")
-    house_names.each_with_index {|house,index| puts "[#{index+1}] #{house}"}
+
+def self.tester
+  page = Nokogiri::HTML(open(BASE_URL)) 
+  house_namex = []
+  results= page.css('b a').each_with_index {|house,index| 
+  i=0
+  while i>=19
+    puts "[#{index+1}] #{house.text}" 
+  house_namex<< house.text
+  i+1
 end
+  puts ""}
+ 
+end
+
 
 def self.scraper_house_wiki
   page = Nokogiri::HTML(open(BASE_URL))
@@ -60,4 +69,9 @@ puts "Wikipage link:" + wiki[num -1]
 end
 
 end #final end
-
+ 
+# def self.scraper_house_list
+#     page = Nokogiri::HTML(open(BASE_URL)) 
+#    house_names= page.css('div#mw-content-text').first.css("li>b").text.split("House")
+#    house_names.each_with_index {|house,index| puts "[#{index+1}] #{house}"}
+#end

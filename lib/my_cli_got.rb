@@ -39,6 +39,11 @@ class GOT
     puts ""
   end 
   
+  def tester
+  
+  Scraper.tester
+end
+
   def orders
    input= gets.strip
     if input == "list"
@@ -87,10 +92,7 @@ class GOT
     end
   end
 
-  def tester
-   
-    pathways
-  end
+  
 
  def general_info
   puts ""
@@ -101,10 +103,6 @@ class GOT
      pathways
   end
       
-def tester
-  input= gets.strip
-  Scraper.tester(input.to_i)
-end
 
   
   
@@ -181,8 +179,6 @@ end
   #   end
     
  #end
-  
-  
  
 #  def sigil
 #     puts ""
@@ -222,7 +218,6 @@ end
  #end
   
   
-
 
 end
 
