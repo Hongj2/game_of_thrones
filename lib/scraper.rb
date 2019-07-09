@@ -21,29 +21,36 @@ end
 
 def self.scraper_house_wiki
   page = Nokogiri::HTML(open(BASE_URL))
-  house_hash=[]
+  wiki= []
+  sigil= []
   results= page.css('b a').each {|house|
-    hash= {
-      house_name: house.text,
-      wiki: house.attribute('href').value,
-      sigil: Nokogiri::HTML(open("https://gameofthrones.fandom.com#{wiki}")).css("div.pi-item>div").first.text
-    }
-      house_hash << hash
- Houses.new(house_name,wiki,sigil)
- }
-house_hash
+  wiki<< "https://gameofthrones.fandom.com#{house.attribute('href').value}" 
+  sigil<< Nokogiri::HTML(open("https://gameofthrones.fandom.com#{house.attribute('href').value}")).css("div.pi-item>div").first.text 
+}
+ sigil.each_with_index {|s,index| puts "[#{index+1}] #{s}"}
 end
 
-def self.tester
+def self.gen(num)
   page = Nokogiri::HTML(open(BASE_URL))
-  house_name =[]
-  wiki = []
+  house_name= []
+  wiki= []
+  sigil= []
+  gen_info = []
   results= page.css('b a').each {|house|
   house_name<< house.text
   wiki<< "https://gameofthrones.fandom.com#{house.attribute('href').value}" 
+  gen_info<< Nokogiri::HTML(open("https://gameofthrones.fandom.com#{house.attribute('href').value}")).css('div#mw-content-text>p').first.text
+  sigil<< Nokogiri::HTML(open("https://gameofthrones.fandom.com#{house.attribute('href').value}")).css("div.pi-item>div").first.text 
 }
-#puts wiki
-#puts house_name
+
+puts ""
+puts house_name[num -1]
+puts "Sigil:"+ sigil[num -1]
+puts ""
+puts gen_info[num -1]
+puts ""
+puts "Wikipage link:" + wiki[num -1]
+
 end
 
 end #final end

@@ -33,8 +33,8 @@ class GOT
     puts "                     OF WESTEROS                    ".bold
     puts ""
     puts "To see the list of the great houses of Westeros, type: " + "[list]".red.bold 
-    puts "To see the information of all the houses of Westeros, type: " + "[all]".red.bold
-    puts "To see the mottos of all the houses of Westeros, type: " + "[mottos]".red.bold
+    puts "To see the information of all the houses of Westeros, type: " + "[general]".red.bold
+    puts "To see the mottos of all the houses of Westeros, type: " + "[motto]".red.bold
     puts "To see the sigils of all the houses of Westeros, type: " + "[sigil]".red.bold
     puts ""
   end 
@@ -43,10 +43,10 @@ class GOT
    input= gets.strip
     if input == "list"
       list_of_house
-    elsif input == "all"
+    elsif input == "general"
       general_info
-    elsif  input == "mottos"
-      mottos
+    elsif  input == "motto"
+      motto
     elsif input == "sigil"
       sigil
     elsif  input == "menu"
@@ -65,20 +65,19 @@ class GOT
     puts "To exit type: " + "[exit]".red.bold    
     puts "To return back to the main page type: " + "[welcome]".red.bold    
     puts "To see the list of the great houses of Westeros, type: " + "[list]".red.bold 
-    puts "To see the information of all the houses of Westeros, type: " + "[all]".red.bold
-    puts "To see the mottos of all the houses of Westeros, type: " + "[motto]".red.bold      
+    puts "To see the information of all the houses of Westeros, type: " + "[general]".red.bold
+    puts "To see the mottos of all the houses of Westeros, type: " + "[motto]".red.bold    
+     puts "To see the sigils of all the houses of Westeros, type: " + "[sigil]".red.bold
     puts ""
      input= gets.strip
     if input == "welcome"
       run
-    elsif  input == "mottos"
-      mottos
+    elsif  input == "motto"
+      motto
     elsif input == "list"
       list_of_house
-    elsif input == "all"
+    elsif input == "general"
       general_info
-    elsif  input == "motto"
-      mottos
     elsif input == "exit"
      exit
     else 
@@ -103,7 +102,8 @@ class GOT
   end
       
 def tester
-  Scraper.tester
+  input= gets.strip
+  Scraper.tester(input.to_i)
 end
 
   
@@ -119,8 +119,8 @@ end
      puts ""
      
       input= gets.strip
-     if input.to_i.to_s == input
-      Houses.all
+      if input.to_i.to_s == input
+       Scraper.gen(input.to_i)
          puts ""
          puts "To see menu type [menu]"
          puts "to return back to the list of houses types: [list]"
@@ -156,9 +156,9 @@ end
      puts "To see menu type [menu]"
      puts ""
      
-      input= gets.strip
+       input= gets.strip
       if input.to_i.to_s == input
-          puts "HASH RETURN"
+       Scraper.gen(input.to_i)
          puts ""
          puts "To return back to the list of mottos types: [mottos]"
          puts "To see menu type [menu]"
@@ -188,23 +188,25 @@ end
      puts ""
      puts "This is a list of sigils of the Great Houses of Westeros".blue.bold
      puts ""
+     Scraper.scraper_house_wiki
      puts ""
      puts "To see the general information about a house, type number [1-20]"
      puts "To see menu type [menu]"
      puts ""
      
+      
       input= gets.strip
       if input.to_i.to_s == input
-         puts "HASH RETURN"
+       Scraper.gen(input.to_i)
          puts ""
          puts "To return back to the list of sigils, types: [sigils]"
          puts "To see menu type [menu]"
          puts ""
     
                input= gets.strip
-                 if input == "sigils"
-                      sigils
-                      elsif input == "menu"
+                 if input == "sigil"
+                      sigil
+                  elsif input == "menu"
                  pathways
                  else 
                       puts "The Lord Command Snow knows nothing...Try again".blue.bold
