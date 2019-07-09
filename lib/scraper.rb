@@ -31,10 +31,20 @@ def self.scraper_house_wiki
       house_hash << hash
  Houses.new(house_name,wiki,sigil)
  }
-
+house_hash
 end
 
-
+def self.tester
+  page = Nokogiri::HTML(open(BASE_URL))
+  house_name =[]
+  wiki = []
+  results= page.css('b a').each {|house|
+  house_name<< house.text
+  wiki<< "https://gameofthrones.fandom.com#{house.attribute('href').value}" 
+}
+#puts wiki
+#puts house_name
+end
 
 end #final end
 

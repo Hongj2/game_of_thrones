@@ -102,6 +102,9 @@ class GOT
      pathways
   end
       
+def tester
+  Scraper.tester
+end
 
   
   
