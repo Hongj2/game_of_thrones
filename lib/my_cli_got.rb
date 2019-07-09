@@ -118,6 +118,9 @@ end
      
       input= gets.strip
       if input.to_i.to_s == input
+        ## using House.all find the corresponding house instance
+        #select_house = House.all[input]
+        #Scraper.gen(select_house)
        Scraper.gen(input.to_i)
          puts ""
          puts "To see menu type [menu]"

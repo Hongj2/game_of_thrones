@@ -1,32 +1,33 @@
 require 'nokogiri'
 require 'open-uri'
 require_relative './houses'
+require 'pry'
 class Scraper
 
 BASE_URL = 'https://gameofthrones.fandom.com/wiki/Great_House'
 
   def self.scraper_gen_info
     page = Nokogiri::HTML(open(BASE_URL)) 
-    general_info = page.css('div#mw-content-text ul').text.split("\n")
-    general_info.each_with_index {|house,index| 
-    puts "[#{index +1}] #{house}" 
-    puts ""}.map
+    general_info = page.css('div#mw-content-text ul')[0..2].text.split("\n")
+  
+    #instantiate new House objects with name and url
   end
 
 def self.tester
   page = Nokogiri::HTML(open(BASE_URL)) 
   house_namex = []
   results= page.css('b a').each_with_index {|house,index| 
-  i=0
-  while i>=19
-    puts "[#{index+1}] #{house.text}" 
   house_namex<< house.text
-  i+1
-end
-  puts ""}
+    puts "[#{index+1}] #{house.text}" 
+  puts ""}.map
  
 end
 
+ def self.scraper_house_list
+     page = Nokogiri::HTML(open(BASE_URL)) 
+    house_names= page.css('div#mw-content-text').first.css("li>b").text.split("House")
+    house_names.each_with_index {|house,index| puts "[#{index+1}] #{house}"}
+end
 
 def self.scraper_house_wiki
   page = Nokogiri::HTML(open(BASE_URL))
@@ -39,8 +40,11 @@ def self.scraper_house_wiki
  sigil.each_with_index {|s,index| puts "[#{index+1}] #{s}"}
 end
 
-def self.gen(num)
-  page = Nokogiri::HTML(open(BASE_URL))
+def self.gen(num) #house_obj
+  page = Nokogiri::HTML(open(BASE_URL)) #house_obj.url
+  # after 2nd lvl scrape update house objects
+  #house_obj.sigil = page.css("sigil selector")
+  
   house_name= []
   wiki= []
   sigil= []
@@ -50,9 +54,11 @@ def self.gen(num)
   
   house_name<< house.text
   wiki<< "https://gameofthrones.fandom.com#{house.attribute('href').value}" 
-  gen_info<< Nokogiri::HTML(open("https://gameofthrones.fandom.com#{house.attribute('href').value}")).css('div#mw-content-text>p').first.text
-  motto<< Nokogiri::HTML(open("https://gameofthrones.fandom.com#{house.attribute('href').value}")).css('aside div.pi-data-value>a')[1].text
-  sigil<< Nokogiri::HTML(open("https://gameofthrones.fandom.com#{house.attribute('href').value}")).css("div.pi-item>div").first.text 
+  house_page = page= Nokogiri::HTML(open("https://gameofthrones.fandom.com#{url}"))
+  page= Nokogiri::HTML(open("https://gameofthrones.fandom.com#{house.attribute('href').value}"))
+  gen_info<< page.css('div#mw-content-text>p').first.text
+  motto<< page.css('aside div.pi-data-value>a')[1].text
+  sigil<< page.css("div.pi-item>div").first.text 
   
 }
 
@@ -70,8 +76,5 @@ end
 
 end #final end
  
-# def self.scraper_house_list
-#     page = Nokogiri::HTML(open(BASE_URL)) 
-#    house_names= page.css('div#mw-content-text').first.css("li>b").text.split("House")
-#    house_names.each_with_index {|house,index| puts "[#{index+1}] #{house}"}
-#end
+ 
+ 

@@ -1,6 +1,6 @@
 require_relative './scraper'
 
-class Houses
+class House
   attr_accessor :name, :sigil, :motto, :wiki
 @@all = []
 
@@ -10,7 +10,7 @@ def initialize(name,wiki,sigil)
   @sigil= sigil
   @@all << self 
 end
-
+# need to a create method
 
 def self.all
     @@all
