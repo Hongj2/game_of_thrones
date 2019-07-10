@@ -18,19 +18,21 @@ html = Nokogiri::HTML(open(BASE_URL))
   pages = html.css('b a').each {|houses|
     name= houses.text
     url= "https://gameofthrones.fandom.com#{houses.attribute('href').value}" 
-  House.new(name,url)}
+  House.create(name,url)}
 end
 
 # after 2nd lvl scrape update house objects
 #house_obj.sigil = page.css("sigil selector")
 
 def self.general_information(house_obj)
+  
 gen_info= {}
 html = Nokogiri::HTML(open("#{house_obj.url}"))
       gen_info[:summary]= html.css('div#mw-content-text>p').first.text
       gen_info[:motto]= html.css('aside div.pi-data-value>a')[1].text
       gen_info[:sigil]= html.css("div.pi-item>div").first.text 
 gen_info
+binding.pry
 end
  
 

@@ -5,9 +5,10 @@ require_relative './houses'
 require 'pry'
 
 class GOT
- BASE_URL = 'https://gameofthrones.fandom.com/wiki/Great_House'
+ 
  
   def run
+    Scraper.scrape_lvl1 
     welcome
     orders
   end
@@ -41,6 +42,7 @@ class GOT
 
 
 def tester
+  
     input = gets.chomp.to_i
     if (1..House.all.length).include?(input)
     selected_house = puts House.all[input -1]
@@ -107,7 +109,8 @@ def list_of_house
   puts ""
   puts "This is the list of Great Houses of Westeros".blue.bold
   puts ""
-House.all.each_with_index {|house,index| puts "[#{index+1}] #{house}"} 
+House.all.each_with_index {|house,index| puts "[#{index+1}] #{house.name}"}
+
   puts ""
   puts "To see the general information about a house, type numbers:" "[1-20]".blue.bold 
   puts "To see menu type:" "[menu]".blue.bold 
