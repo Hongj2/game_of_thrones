@@ -2,6 +2,7 @@ require 'nokogiri'
 require 'colorize'
 require 'open-uri'
 require_relative './houses'
+require 'pry'
 
 class GOT
  BASE_URL = 'https://gameofthrones.fandom.com/wiki/Great_House'
@@ -40,10 +41,14 @@ class GOT
 
 
 def tester
-  #input= gets.strip
-  House.create
-  exit
+    input = gets.chomp.to_i
+    if (1..House.all.length).include?(input)
+    selected_house = puts House.all[input -1]
+      Scraper.general_information(selected_house)
+    end
+  exit 
 end
+
 
 def orders
  input= gets.strip
@@ -51,10 +56,6 @@ def orders
       list_of_house
     elsif input == "general"
       general_info
-    elsif  input == "motto"
-      motto
-    elsif input == "sigil"
-      sigil
     elsif  input == "menu"
       pathways
     elsif input == "tester"
@@ -64,7 +65,7 @@ def orders
     end
  orders
 end
-  
+
   
 def pathways
   puts ""
@@ -78,8 +79,6 @@ def pathways
    input= gets.strip
     if input == "welcome"
       run
-    elsif  input == "motto"
-      motto
     elsif input == "list"
       list_of_house
     elsif input == "general"
@@ -93,7 +92,6 @@ def pathways
     end
 end
 
-  
 
 def general_info
   puts ""
@@ -104,9 +102,7 @@ def general_info
      pathways
 end
       
-
-  
-  
+      
 def list_of_house
   puts ""
   puts "This is the list of Great Houses of Westeros".blue.bold
