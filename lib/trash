@@ -48,3 +48,6 @@ puts ""
 puts "Wikipage link:" + wiki[num -1]
 
 end
+
+#puts "To see the mottos of all the houses of Westeros, type: " + "[motto]".red.bold
+    #puts "To see the sigils of all the houses of Westeros, type: " + "[sigil]".red.bold

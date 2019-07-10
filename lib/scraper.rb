@@ -6,7 +6,6 @@ class Scraper
 
 BASE_URL = 'https://gameofthrones.fandom.com/wiki/Great_House'
 
-#(LEAVE ALONE)
 def self.scraper_gen_info
   page = Nokogiri::HTML(open(BASE_URL)) 
   general_info = page.css('div#mw-content-text ul')[0..2].text.split("\n")
@@ -24,10 +23,7 @@ end
 
 # after 2nd lvl scrape update house objects
 #house_obj.sigil = page.css("sigil selector")
-#html.collect {|house|
-#page = house.attribute('href').value
-   
-   
+
 def self.general_information(house_obj)
 gen_info= {}
 html = Nokogiri::HTML(open("#{house_obj.url}"))
