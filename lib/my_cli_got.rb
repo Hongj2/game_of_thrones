@@ -91,19 +91,6 @@ def pathways
 end
 
 
-# def general_info
-#   puts ""
-#   puts "This is the list of general information about the Great Houses of Westeros".blue.bold 
-#   puts ""
-# House.all.each_with_index do |house,index| 
-#   puts "[#{index+1}] #{house.summary}" 
-# binding.pry
-# end
-   
-#   puts "" 
-#     pathways
-# end
-      
       
 def list_of_house
   puts ""
