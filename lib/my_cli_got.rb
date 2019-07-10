@@ -44,6 +44,7 @@ def get_house_detail(input)
     if (1..House.all.length).to_a.include?(input)
     selected_house = House.all[input -1]
       Scraper.general_information(selected_house)
+       puts selected_house.sigil
     end
 end
 
@@ -90,14 +91,18 @@ def pathways
 end
 
 
-def general_info
-  puts ""
-  puts "This is the list of general information about the Great Houses of Westeros".blue.bold 
-  puts ""
-   House.all.each_with_index {|house,index| puts "[#{index+1}] #{house.url}"}
-  puts "" 
-     pathways
-end
+# def general_info
+#   puts ""
+#   puts "This is the list of general information about the Great Houses of Westeros".blue.bold 
+#   puts ""
+# House.all.each_with_index do |house,index| 
+#   puts "[#{index+1}] #{house.summary}" 
+# binding.pry
+# end
+   
+#   puts "" 
+#     pathways
+# end
       
       
 def list_of_house
@@ -105,7 +110,6 @@ def list_of_house
   puts "This is the list of Great Houses of Westeros".blue.bold
   puts ""
 House.all.each_with_index {|house,index| puts "[#{index+1}] #{house.name}"}
-
   puts ""
   puts "To see the general information about a house, type numbers:" "[1-20]".blue.bold 
   puts "To see menu type:" "[menu]".blue.bold 

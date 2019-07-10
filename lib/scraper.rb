@@ -28,12 +28,12 @@ end
 #house_obj.sigil = page.css("sigil selector")
 
 def self.general_information(house_obj)
-gen_info= {}
+
 html = Nokogiri::HTML(open("#{house_obj.url}"))
       house_obj.summary= html.css('div#mw-content-text>p').first.text
       house_obj.motto= html.css('aside div.pi-data-value>a')[1].text
       house_obj.sigil= html.css("div.pi-item>div").first.text 
-house_obj
+
 
 end
  
