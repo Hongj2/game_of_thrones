@@ -7,14 +7,13 @@ class GOT
  BASE_URL = 'https://gameofthrones.fandom.com/wiki/Great_House'
  
   def run
+   
     welcome
     orders
   end
 
-def create_house 
-house_array = Scraper.scrape_lvl1
-    House.create(house_array)
-end
+
+
 
   def welcome
     puts ""
@@ -48,7 +47,7 @@ end
 
   def tester
   #input= gets.strip
-  Scraper.general_information
+  House.create
   exit
 end
 
@@ -118,7 +117,7 @@ end
      puts ""
      puts "This is the list of Great Houses of Westeros".blue.bold
      puts ""
-     Scraper.scraper_house_list
+     House.all.each_with_index {|house,index| puts "[#{index+1}] #{house}"} 
      puts ""
      puts "To see the general information about a house, type number [1-20]"
      puts "To see menu type [menu]"

@@ -6,11 +6,16 @@ class House
 def initialize(name,url)
   @name=name
   @url=url 
-  @@all << self 
 end
 
-def self.create(house_array)
-   house_array.each{|house| House.new(house)}
+def save
+    self.class.all << self
+end
+
+def self.create(name,url)
+    house = House.new(name,url)
+    house.save
+    house
 end
  
 def self.all
