@@ -34,7 +34,7 @@ html = Nokogiri::HTML(open("#{house_obj.url}"))
       house_obj.motto= html.css('aside div.pi-data-value>a')[1].text
       house_obj.sigil= html.css("div.pi-item>div").first.text 
 house_obj
-binding.pry
+
 end
  
 

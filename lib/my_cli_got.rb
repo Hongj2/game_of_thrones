@@ -6,7 +6,6 @@ require 'pry'
 
 class GOT
  
- 
   def run
     Scraper.scraper_gen_info
     welcome
@@ -40,15 +39,12 @@ class GOT
   end 
 
 
-
 def get_house_detail(input)
   input=input.to_i
-  
     if (1..House.all.length).to_a.include?(input)
     selected_house = House.all[input -1]
       Scraper.general_information(selected_house)
     end
-   
 end
 
 
@@ -75,8 +71,7 @@ def pathways
   puts "To return back to the main page type: " + "[welcome]".red.bold    
   puts "To see the list of the great houses of Westeros, type: " + "[list]".red.bold 
   puts "To see the information of all the houses of Westeros, type: " + "[general]".red.bold
-    #puts "To see the mottos of all the houses of Westeros, type: " + "[motto]".red.bold    
-    # puts "To see the sigils of all the houses of Westeros, type: " + "[sigil]".red.bold
+    
   puts ""
    input= gets.strip
     if input == "welcome"
@@ -99,7 +94,7 @@ def general_info
   puts ""
   puts "This is the list of general information about the Great Houses of Westeros".blue.bold 
   puts ""
-   Scraper.scraper_gen_info
+   House.all.each_with_index {|house,index| puts "[#{index+1}] #{house.url}"}
   puts "" 
      pathways
 end
