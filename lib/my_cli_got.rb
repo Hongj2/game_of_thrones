@@ -2,10 +2,9 @@ require 'nokogiri'
 require 'colorize'
 require 'open-uri'
 require_relative './houses'
-require 'pry'
+
 
 class GOT
- 
   def run
     Scraper.scraper_gen_info
     welcome
@@ -35,6 +34,7 @@ class GOT
     puts ""
     puts "To see the list of the great houses of Westeros, type: " + "[list]".red.bold 
     puts "To see the information of all the houses of Westeros, type: " + "[general]".red.bold
+    puts "**SPOILER** To see which house made it to end, type at your own risk: " + "[status]".red.bold
     puts ""
   end 
 
@@ -44,24 +44,31 @@ def get_house_detail(input)
     if (1..House.all.length).to_a.include?(input)
     selected_house = House.all[input -1]
       Scraper.general_information(selected_house)
-       puts selected_house.sigil
+      puts "" 
+      puts "                            "+ selected_house.name.bold 
+      puts "" 
+      puts "House sigial: "+ selected_house.sigil
+      puts "House motto:  "+ selected_house.motto
+      puts "" 
+      puts selected_house.summary
+      puts "" 
     end
 end
 
 
 def orders
- input= gets.strip
-    if input == "list"
-      list_of_house
-    elsif input == "general"
-      general_info
-    elsif  input == "menu"
-      pathways
-    elsif input == "tester"
-      tester
-    else 
-      puts "The Lord Command Snow knows nothing...Try again".blue.bold
-    end
+input= gets.strip
+  if input == "list"
+   list_of_house
+  elsif input == "general"
+    general_info
+  elsif  input == "menu"
+    pathways
+  elsif input == "status"
+    status
+  else 
+    puts "The Lord Command Snow knows nothing...Try again".blue.bold
+  end
  orders
 end
 
@@ -93,43 +100,58 @@ end
 
       
 def list_of_house
+ puts ""
+ puts "This is the list of Great Houses of Westeros".blue.bold
+ puts ""
+ House.all.each_with_index {|house,index| puts "[#{index+1}] #{house.name}"}
+ puts ""
+ puts "To see the general information about a house, type numbers:" "[1-20]".blue.bold 
+ puts "To see menu type:" "[menu]".blue.bold 
+ puts ""
+  input= gets.strip
+if input.to_i.to_s == input
+  get_house_detail(input)
+   puts ""
+   puts "To see menu type:" "[menu]".blue.bold 
+   puts "to return back to the list of houses types:" "[list]".blue.bold 
+   puts ""
+  input= gets.strip
+    if input == "list"
+      list_of_house
+    elsif input == 'menu'
+      pathways
+    else
+      pathways
+    end
+ else
+  input == "menu"
+  pathways
+ end
+end
+
+def status
   puts ""
-  puts "This is the list of Great Houses of Westeros".blue.bold
+  puts"[These following house made to the end of season 8:]".bold
   puts ""
-House.all.each_with_index {|house,index| puts "[#{index+1}] #{house.name}"}
+  House.all[0..7].each_with_index {|house,index| puts "[#{index+1}] #{house.name}"}
+  puts "" 
+  puts "[Twelve Great Houses have gone extinct, three of which were as a result of their defeat in the Targaryen Conquest, four of which as a result of the War of the Five Kings:]".bold
   puts ""
+  House.all[8..19].each_with_index {|house,index| puts "[#{index+9}] #{house.name}"}
+  puts "" 
   puts "To see the general information about a house, type numbers:" "[1-20]".blue.bold 
   puts "To see menu type:" "[menu]".blue.bold 
   puts ""
-     
-  input= gets.strip
-  get_house_detail(input)
-  
-    #if input.to_i.to_s == input
+     input= gets.strip
+  if input.to_i.to_s == input
+    get_house_detail(input)
+    pathways
     
-      # puts ""
-      # puts "To see menu type:" "[menu]".blue.bold 
-      # puts "to return back to the list of houses types:" "[list]".blue.bold 
-      # puts ""
-      #     input= gets.strip
-      #       if input == "list"
-      #           list_of_house
-      #       elsif input == 'menu'
-      #           pathways
-      #       else 
-      #         puts "The Lord Command Snow knows nothing...Try again".blue.bold
-      #         puts ""
-      #           pathways
-      #       end
-     #elsif input == "menu"
-         pathways
-    # end
+  else 
+    pathways
 end
-
-
-
-
- 
+  
+end
 
   
   
