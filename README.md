@@ -1,3 +1,10 @@
+Hello! Welcome to this gem about Great Houses of Game of Thrones, this gem is to provide a list of all the houses of Westeros.
+
+The interactive aspect allows you to explore the houses and learn about it a little more. There are obvious spoilers so be aware!! There are options to check the status of a house, it would tell if a house survived George R. R. ruthlessness.
+
+I hope you enjoy the this interactive program for it taken a couple years out of me.
+
+
 # GameOfThrones
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/game_of_thrones`. To experiment with that code, run `bin/console` for an interactive prompt.
