@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["'Jessica Hong'"]
   spec.email         = ["'jessicahong.ngnr@gmail.com'"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one. summary}
-  spec.description   = %q{TODO: Write a longer description or delete this line.discription}
+  spec.summary       = %q{This is an interactive project that guides you throught the Great Houses of Westeros.summary}
+  spec.description   = %q{it will allows you to explore the houses and learn about it a little more by providing the house sigil, motto, and a short introductory summary.discription}
   spec.homepage      = "https://github.com/Hongj2/game_of_thrones/blob/master/README.md."
   spec.license       = "MIT"
 
