@@ -13,6 +13,9 @@ class GOT
 
   def welcome
     puts ""
+    puts ""
+    puts ""
+    puts ""
     puts"       |>      |>                     |>      |>".blue.bold
     puts"       |_-___-_|                      |_-___-_|".blue.bold
     puts"        |vvvvv|                        |vvvvv|".blue.bold
@@ -74,6 +77,8 @@ class GOT
     elsif input == "spoil me silly"
       spoil
     elsif input == "exit"
+    puts ""
+    puts "valar morghulis".bold
       exit
     else
       puts "The Lord Command Snow knows nothing...Try again".blue.bold
@@ -98,6 +103,8 @@ class GOT
     elsif input == "status"
       status
     elsif input == "exit"
+        puts ""
+    puts "valar morghulis".bold
       exit
     else
       puts "The Lord Command Snow knows nothing...Try again".blue.bold
@@ -167,7 +174,7 @@ class GOT
     puts "ARE YOU SURE YOU WANT TO SPOIL THE SHOW?" + "[Y/N]".red.bold
     puts ""
     input= gets.strip
-    if input == "Y"||"y"
+    if input == "Y"||input == "y"
       puts ""
       puts "wow. are you even a true fan...? Alright last warning, type " + "[spoiler]".red.bold
       puts "if you are heistating and want to go back type: " + "[regret]".red.bold + " to return to back to the welcome page"
@@ -181,7 +188,7 @@ class GOT
       elsif input == "regret"
         welcome
       end
-    elsif input == "N"||"n"
+    elsif input == "N"||input == "n"
       puts ""
       puts "I smell regret. no worries - type," "[regret]".red.bold + " to return to back to the welcome page"
       puts ""
