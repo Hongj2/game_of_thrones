@@ -1,3 +1,4 @@
+#all gems to go to environment 
 require 'nokogiri'
 require 'open-uri'
 require_relative './houses'
@@ -15,8 +16,9 @@ def self.scraper_gen_info
   end
   
 #instantiate new House objects with name and url
-
+#remove scrape_lvl1 and rename all the methods to be v different and discriptive 
 def self.scrape_lvl1 
+  puts "********scraping*********"
 html = Nokogiri::HTML(open(BASE_URL)) 
   pages = html.css('b a').each {|houses|
     name= houses.text
@@ -28,7 +30,7 @@ end
 #house_obj.sigil = page.css("sigil selector")
 
 def self.general_information(house_obj)
-
+puts "********scraping*********"
 html = Nokogiri::HTML(open("#{house_obj.url}"))
       house_obj.summary= html.css('div#mw-content-text>p').first.text
       house_obj.motto= html.css('aside div.pi-data-value>a')[1].text
@@ -39,6 +41,4 @@ end
  
 
 end #final end
- 
- 
  

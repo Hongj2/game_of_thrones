@@ -46,12 +46,12 @@ class GOT
     puts ""
   end
 
-
+#statement mofidifier/ unless - bc we dont want to scrap again if the information already exist 
   def get_house_detail(input)
     input=input.to_i
     if (1..House.all.length).to_a.include?(input)
       selected_house = House.all[input -1]
-      Scraper.general_information(selected_house)
+      Scraper.general_information(selected_house) #unless the information is already there/if/unless
       puts ""
       puts "                            "+ selected_house.name.bold
       puts ""
@@ -63,7 +63,7 @@ class GOT
     end
   end
 
-
+#update to use case statement
   def orders
     input= gets.strip
     if input == "list"
@@ -86,7 +86,7 @@ class GOT
     orders
   end
 
-
+#rewrite pathways to call order
   def pathways
     puts ""
     puts "To return back to the main page type: " + "[welcome]".red.bold
@@ -124,6 +124,7 @@ class GOT
     puts "To see the general information about a house, type numbers:" "[1-20]".blue.bold
     puts "To see menu type:" "[menu]".blue.bold
     puts ""
+  #need to break apart to seperate logical
     input= gets.strip
     if input.to_i.to_s == input
       get_house_detail(input)

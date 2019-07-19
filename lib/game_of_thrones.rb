@@ -1,3 +1,5 @@
+#enviornment 
+#list all the gem that is being used
 require_relative "./game_of_thrones/version"
 
 module GameOfThrones
