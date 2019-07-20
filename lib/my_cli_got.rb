@@ -1,8 +1,8 @@
 class CLI
   def run
-    Scraper.scraper_gen_info
+    Scraper.inital_scrape
     welcome
-    main_menu_orders
+    main_pathways
   end
 
   def welcome
@@ -58,7 +58,7 @@ class CLI
   end
 
 #update to use case statement
-  def main_menu_orders
+  def main_pathways
     input= gets.strip
     if input == "list"
       list_of_house
@@ -80,11 +80,23 @@ class CLI
       exit
     else
       puts "The Lord Command Snow knows nothing...Try again".blue.bold
-       main_menu_orders
+       main_pathways
     end
   end
   
-def list_menu_orders
+  def secondary_menu
+    puts ""
+    puts "To return back to the main page type: " + "[welcome]".red.bold
+    puts "To see the list of the great houses of Westeros, type: " + "[list]".red.bold
+    puts "SPOILER WARNING ".red + "To check which houses made it to the end, type: " + "[status]".red.bold
+    puts ""
+    puts "To exit type: " + "[exit]".red.bold
+    puts ""
+  main_pathways
+  end
+
+  
+def post_list_menu 
 input= gets.strip
     if input.to_i.to_s == input
       get_house_detail(input)
@@ -105,17 +117,29 @@ input= gets.strip
       secondary_menu
     end
   end
-  
-  def secondary_menu
-    puts ""
-    puts "To return back to the main page type: " + "[welcome]".red.bold
-    puts "To see the list of the great houses of Westeros, type: " + "[list]".red.bold
-    puts "SPOILER WARNING ".red + "To check which houses made it to the end, type: " + "[status]".red.bold
-    puts ""
-    puts "To exit type: " + "[exit]".red.bold
-    puts ""
-   main_menu_orders
+
+  def post_status_menu 
+input= gets.strip
+    if input.to_i.to_s == input
+      get_house_detail(input)
+      puts ""
+      puts "To see menu type:" "[menu]".blue.bold
+      puts "to return back to the list of houses types:" "[status]".blue.bold
+      puts ""
+      input= gets.strip
+      if input == "status"
+        status
+      elsif input == 'menu'
+        secondary_menu
+      else
+        secondary_menu
+      end
+    else
+      input == "menu"
+      secondary_menu
+    end
   end
+  
 
 
 
@@ -128,17 +152,7 @@ input= gets.strip
     puts "To see the general information about a house, type numbers:" "[1-20]".blue.bold
     puts "To see menu type:" "[menu]".blue.bold
     puts ""
-  input= gets.strip
-    if input.to_i.to_s == input
-      get_house_detail(input)
-      secondary_menu
-    elsif
-      secondary_menu
-   else
-      puts "The Lord Command Snow knows nothing...Try again".blue.bold
-       main_menu_orders
-    
-  end
+post_list_menu 
 end
 
   def status
@@ -152,19 +166,10 @@ end
     House.all[8..19].each_with_index {|house,index| puts "[#{index+9}]".bold + " #{house.name}".red}
     puts ""
     puts "To see the general information about a house, type numbers:" + "[1-20]".blue.bold
+    puts "To return back to the status of houses, type: " + "[status]"
     puts "To see menu type:" + "[menu]" .blue.bold
     puts ""
-   input= gets.strip
-    if input.to_i.to_s == input
-      get_house_detail(input)
-      secondary_menu
-    elsif
-      secondary_menu
-   else
-      puts "The Lord Command Snow knows nothing...Try again".blue.bold
-       main_menu_orders
-    
-  end
+  post_status_menu 
 end
 
   
