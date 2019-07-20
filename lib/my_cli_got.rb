@@ -1,14 +1,8 @@
-require 'nokogiri'
-require 'colorize'
-require 'open-uri'
-require_relative './houses'
-
-
-class GOT
+class CLI
   def run
     Scraper.scraper_gen_info
     welcome
-    orders
+    main_menu_orders
   end
 
   def welcome
@@ -64,14 +58,16 @@ class GOT
   end
 
 #update to use case statement
-  def orders
+  def main_menu_orders
     input= gets.strip
     if input == "list"
       list_of_house
     elsif input == "general"
       general_info
     elsif  input == "menu"
-      pathways
+      secondary_menu
+    elsif input == "welcome"
+      run
     elsif input == "status"
       status
     elsif input == "spoil me silly"
@@ -79,15 +75,38 @@ class GOT
     elsif input == "exit"
     puts ""
     puts "valar morghulis".bold
+    puts ""
+    puts ""
       exit
     else
       puts "The Lord Command Snow knows nothing...Try again".blue.bold
+       main_menu_orders
     end
-    orders
   end
-
-#rewrite pathways to call order
-  def pathways
+  
+def list_menu_orders
+input= gets.strip
+    if input.to_i.to_s == input
+      get_house_detail(input)
+      puts ""
+      puts "To see menu type:" "[menu]".blue.bold
+      puts "to return back to the list of houses types:" "[list]".blue.bold
+      puts ""
+      input= gets.strip
+      if input == "list"
+        list_of_house
+      elsif input == 'menu'
+        secondary_menu
+      else
+        secondary_menu
+      end
+    else
+      input == "menu"
+      secondary_menu
+    end
+  end
+  
+  def secondary_menu
     puts ""
     puts "To return back to the main page type: " + "[welcome]".red.bold
     puts "To see the list of the great houses of Westeros, type: " + "[list]".red.bold
@@ -95,22 +114,7 @@ class GOT
     puts ""
     puts "To exit type: " + "[exit]".red.bold
     puts ""
-    input= gets.strip
-    if input == "welcome"
-      run
-    elsif input == "list"
-      list_of_house
-    elsif input == "status"
-      status
-    elsif input == "exit"
-        puts ""
-    puts "valar morghulis".bold
-      exit
-    else
-      puts "The Lord Command Snow knows nothing...Try again".blue.bold
-      puts ""
-      pathways
-    end
+   main_menu_orders
   end
 
 
@@ -124,27 +128,18 @@ class GOT
     puts "To see the general information about a house, type numbers:" "[1-20]".blue.bold
     puts "To see menu type:" "[menu]".blue.bold
     puts ""
-  #need to break apart to seperate logical
-    input= gets.strip
+  input= gets.strip
     if input.to_i.to_s == input
       get_house_detail(input)
-      puts ""
-      puts "To see menu type:" "[menu]".blue.bold
-      puts "to return back to the list of houses types:" "[list]".blue.bold
-      puts ""
-      input= gets.strip
-      if input == "list"
-        list_of_house
-      elsif input == 'menu'
-        pathways
-      else
-        pathways
-      end
-    else
-      input == "menu"
-      pathways
-    end
+      secondary_menu
+    elsif
+      secondary_menu
+   else
+      puts "The Lord Command Snow knows nothing...Try again".blue.bold
+       main_menu_orders
+    
   end
+end
 
   def status
     puts ""
@@ -159,16 +154,20 @@ class GOT
     puts "To see the general information about a house, type numbers:" + "[1-20]".blue.bold
     puts "To see menu type:" + "[menu]" .blue.bold
     puts ""
-    input= gets.strip
+   input= gets.strip
     if input.to_i.to_s == input
       get_house_detail(input)
-      pathways
-
-    else
-      pathways
-    end
-
+      secondary_menu
+    elsif
+      secondary_menu
+   else
+      puts "The Lord Command Snow knows nothing...Try again".blue.bold
+       main_menu_orders
+    
   end
+end
+
+  
 
   def spoil
     puts ""
@@ -185,7 +184,7 @@ class GOT
         puts ""
         puts "                Arya sticked the Night King with the pointy end.".yellow.bold
         puts ""
-        pathways
+        secondary_menu
       elsif input == "regret"
         welcome
       end
@@ -201,7 +200,7 @@ class GOT
         puts ""
         puts "Dude, you are confused."
         puts ""
-        pathways
+        secondary_menu
       end
     end
   end

@@ -2,5 +2,5 @@
 
 require_relative '../lib/game_of_thrones'
 
-app= GOT.new
+app= CLI.new
 app.run

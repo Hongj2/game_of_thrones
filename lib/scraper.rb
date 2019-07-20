@@ -2,7 +2,6 @@
 require 'nokogiri'
 require 'open-uri'
 require_relative './houses'
-require 'pry'
 class Scraper
 
 BASE_URL = 'https://gameofthrones.fandom.com/wiki/Great_House'

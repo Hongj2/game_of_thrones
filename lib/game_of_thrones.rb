@@ -1,5 +1,8 @@
 #enviornment 
 #list all the gem that is being used
+require 'nokogiri'
+require 'colorize'
+require 'open-uri'
 require_relative "./game_of_thrones/version"
 
 module GameOfThrones
