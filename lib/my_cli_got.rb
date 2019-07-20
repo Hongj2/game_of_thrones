@@ -45,7 +45,7 @@ class CLI
     input=input.to_i
     if (1..House.all.length).to_a.include?(input)
       selected_house = House.all[input -1]
-      Scraper.general_information(selected_house) #unless the information is already there/if/unless
+      Scraper.general_information(selected_house) unless selected_house.sigil = nil
       puts ""
       puts "                            "+ selected_house.name.bold
       puts ""
@@ -101,15 +101,13 @@ input= gets.strip
     if input.to_i.to_s == input
       get_house_detail(input)
       puts ""
-      puts "To see menu type:" "[menu]".blue.bold
-      puts "to return back to the list of houses types:" "[list]".blue.bold
+      puts "To see menu type: " "[menu]".blue.bold
+      puts "to return back to the list of houses types: " "[list]".blue.bold
       puts ""
       input= gets.strip
       if input == "list"
         list_of_house
       elsif input == 'menu'
-        secondary_menu
-      else
         secondary_menu
       end
     else
@@ -123,15 +121,13 @@ input= gets.strip
     if input.to_i.to_s == input
       get_house_detail(input)
       puts ""
-      puts "To see menu type:" "[menu]".blue.bold
-      puts "to return back to the list of houses types:" "[status]".blue.bold
+      puts "To see menu type: " "[menu]".blue.bold
+      puts "to return back to the list of houses status: "+ "[status]".blue.bold
       puts ""
       input= gets.strip
       if input == "status"
         status
       elsif input == 'menu'
-        secondary_menu
-      else
         secondary_menu
       end
     else
@@ -140,7 +136,6 @@ input= gets.strip
     end
   end
   
-
 
 
   def list_of_house
@@ -166,10 +161,9 @@ end
     House.all[8..19].each_with_index {|house,index| puts "[#{index+9}]".bold + " #{house.name}".red}
     puts ""
     puts "To see the general information about a house, type numbers:" + "[1-20]".blue.bold
-    puts "To return back to the status of houses, type: " + "[status]"
     puts "To see menu type:" + "[menu]" .blue.bold
     puts ""
-  post_status_menu 
+post_status_menu 
 end
 
   
@@ -187,7 +181,7 @@ end
       input= gets.strip
       if input == "spoiler"
         puts ""
-        puts "                Arya sticked the Night King with the pointy end.".yellow.bold
+        puts "                Arya stuck the Night King with the pointy end.".yellow.bold
         puts ""
         secondary_menu
       elsif input == "regret"
