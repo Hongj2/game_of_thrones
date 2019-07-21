@@ -1,4 +1,3 @@
-
 class Scraper
 
 BASE_URL = 'https://gameofthrones.fandom.com/wiki/Great_House'
@@ -20,7 +19,12 @@ html = Nokogiri::HTML(open("#{house_obj.url}"))
 end
  
 
-end #final end
+end 
+
+
+
+
+
  
  
  

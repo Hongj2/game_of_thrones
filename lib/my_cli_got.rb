@@ -40,12 +40,11 @@ class CLI
     puts ""
   end
 
-#statement mofidifier/ unless - bc we dont want to scrap again if the information already exist 
   def get_house_detail(input)
     input=input.to_i
     if (1..House.all.length).to_a.include?(input)
       selected_house = House.all[input -1]
-      Scraper.general_information(selected_house) unless selected_house.sigil = nil
+      Scraper.general_information(selected_house) unless selected_house.sigil != nil
       puts ""
       puts "                            "+ selected_house.name.bold
       puts ""
@@ -57,22 +56,22 @@ class CLI
     end
   end
 
-#update to use case statement
   def main_pathways
     input= gets.strip
-    if input == "list"
+    case input
+   when "list"
       list_of_house
-    elsif input == "general"
+    when "general"
       general_info
-    elsif  input == "menu"
+    when "menu"
       secondary_menu
-    elsif input == "welcome"
+    when "welcome"
       run
-    elsif input == "status"
+    when"status"
       status
-    elsif input == "spoil me silly"
+    when "spoil me silly"
       spoil
-    elsif input == "exit"
+    when "exit"
     puts ""
     puts "valar morghulis".bold
     puts ""
@@ -105,10 +104,16 @@ input= gets.strip
       puts "to return back to the list of houses types: " "[list]".blue.bold
       puts ""
       input= gets.strip
-      if input == "list"
+      case input
+      when "list"
         list_of_house
-      elsif input == 'menu'
+      when 'menu'
         secondary_menu
+      else 
+        puts ""
+        puts "The Lord Command Snow knows nothing...Try again".blue.bold
+        secondary_menu
+        
       end
     else
       input == "menu"
@@ -117,7 +122,7 @@ input= gets.strip
   end
 
   def post_status_menu 
-input= gets.strip
+    input= gets.strip
     if input.to_i.to_s == input
       get_house_detail(input)
       puts ""
@@ -125,10 +130,16 @@ input= gets.strip
       puts "to return back to the list of houses status: "+ "[status]".blue.bold
       puts ""
       input= gets.strip
-      if input == "status"
+      case input
+      when"status"
         status
-      elsif input == 'menu'
+      when 'menu'
         secondary_menu
+          else 
+        puts ""
+        puts "The Lord Command Snow knows nothing...Try again".blue.bold
+        secondary_menu
+        
       end
     else
       input == "menu"

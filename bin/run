@@ -1,6 +1,12 @@
 #!/usr/bin/env ruby
 
+#shebang is to allow the system to recognize that the code is in Ruby and needs to be run in Ruby 
+
 require_relative '../lib/game_of_thrones'
 
-app= CLI.new
+# allows the loading to take place of the local folders and files.// provides a pathway to the enviornment to make the application run 
+
+app= CLI.new 
+#app is a variable that is a new instance of the class object (.new is a class method that instantiate a new instance) 
 app.run
+#(.run is an intstance method) 
